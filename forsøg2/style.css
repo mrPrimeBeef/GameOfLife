@@ -1,0 +1,39 @@
+body {
+  background-color: bisque;
+}
+#grid {
+  display: grid;
+  grid-template-columns: repeat(15, max-content);
+  place-content: center;
+ gap: 0.7em;
+}
+
+.controls{
+    margin-bottom: 50px;
+}
+
+.cell {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background-color:burlywood ;
+  color: white;
+  height: 30px;
+  aspect-ratio: 1 /1;
+
+  cursor: pointer;
+}
+
+
+.center {
+  text-align: center;
+}
+
+.start{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cell.alive {
+  background-color: #4a90e2;
+}

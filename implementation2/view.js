@@ -10,6 +10,7 @@ export function makeGrid() {
   const generateBtn = document.getElementById("generate");
   const startBtn = document.getElementById("start");
   const stopBtn = document.getElementById("stop");
+  const randBtn = document.getElementById("rand");
 
   generateBtn.addEventListener("click", () => {
     const rows = parseInt(rowsInput.value, 10);
@@ -36,8 +37,9 @@ export function makeGrid() {
     renderGrid();
   });
 
-  stopSimulation();
-  resetGeneration();
+  startBtn.addEventListener("click", startSimulation);
+  stopBtn.addEventListener("click", stopSimulation);
+  randBtn.addEventListener("click", randomize)
 }
 
 function renderGrid() {
@@ -59,14 +61,6 @@ function renderGrid() {
   });
 }
 
-// TODO look at it
-export function stopSimulation() {
-  if (simulationInterval) {
-    clearInterval(simulationInterval);
-    simulationInterval = null;
-  }
-}
-
 function resetGeneration() {
   generation = 0;
   updateGenerationCounter();
@@ -76,3 +70,28 @@ function updateGenerationCounter() {
   const genText = document.getElementById("genText");
   genText.textContent = generation;
 }
+
+// TODO look at it
+export function stopSimulation() {
+  if (simulationInterval) {
+    clearInterval(simulationInterval);
+    resetGeneration();
+    simulationInterval = null;
+  }
+}
+function startSimulation() {
+  const model = controller.getGrid();
+
+  simulationInterval = setInterval(() => {
+    generation++;
+    model.nextGeneration();
+    renderGrid();
+    updateGenerationCounter();
+  }, 500);
+}
+
+  export function randomize(){
+  controller.randomizeGrid();
+  renderGrid();
+}
+

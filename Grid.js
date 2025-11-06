@@ -167,4 +167,8 @@ export default class Grid {
       return undefined;
     }
   }
+
+  updateGrid(newArray) {
+  this.#arr = newArray;
+}
 }
